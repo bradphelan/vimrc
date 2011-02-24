@@ -1,3 +1,17 @@
+" VIMRC
+"
+" This vimrc depends on the excelent 'VMA ( Vim Addon Manager )' To
+" install it run
+"
+"   cd ~
+"   mkdir vim
+"   cd vim
+"   git clone git://github.com/MarcWeber/vim-addon-manager.git
+"
+"
+
+
+
 " set nocompatible should be default. This should be the first line:
 set nocompatible
 
@@ -9,6 +23,11 @@ filetype indent plugin on | syn on
 "             Add On Packages
 " =============================================
 " Utility for loading plugins
+if ! isdirectory(expand("$HOME/vim/vim-addon-managerx"))
+   call input("\n\nPlease read the install instructions in .vimrc with regards to installing the vim-addon-manager: \n\n!!(Press <enter> to exit vim) !!")
+   exit!
+endif
+
 set runtimepath+=$HOME/vim/vim-addon-manager
 fun! AddOn(plug)
     call scriptmanager#Activate(a:plug)
