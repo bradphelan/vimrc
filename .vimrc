@@ -46,6 +46,9 @@ else
   AddOn snippetsEmu
 
   AddGit emu-eggs https://bradphelan@github.com/bradphelan/emu-eggs.git
+
+  " GIT integration
+  AddOn vcscommand
 " =============================================
 " =============================================
 
