@@ -10,47 +10,49 @@
 "
 "
 
-
-
 " set nocompatible should be default. This should be the first line:
 set nocompatible
 
-" enable filetype, plugin and syntax support {{{1
-" This means 
+" enable filetype, plugin and syntax support 
 filetype indent plugin on | syn on
 
 " =============================================
 "             Add On Packages
 " =============================================
-" Utility for loading plugins
-if ! isdirectory(expand("$HOME/vim/vim-addon-managerx"))
-   call input("\n\nPlease read the install instructions in .vimrc with regards to installing the vim-addon-manager: \n\n!!(Press <enter> to exit vim) !!")
-   exit!
-endif
 
-set runtimepath+=$HOME/vim/vim-addon-manager
-fun! AddOn(plug)
-    call scriptmanager#Activate(a:plug)
-endf
-com! -nargs=1 AddOn call AddOn("<args>")
-fun! AddGit(name, url)
-    let g:vim_script_manager['plugin_sources'][a:name]= { 'type' : 'git', 'url' : a:url }
-    call AddOn(a:name)
-endf
-com! -nargs=+ AddGit call AddGit(<f-args>)
+if ! isdirectory(expand("$HOME/vim/vim-addon-manager"))
+   call input("\n\nPlease read the install instructions in .vimrc with regards to installing the vim-addon-manager: \n\n!!(Press <enter> to exit vim) !!")
+else
+  set runtimepath+=$HOME/vim/vim-addon-manager
+  fun! AddOn(plug)
+      call scriptmanager#Activate(a:plug)
+  endf
+  com! -nargs=1 AddOn call AddOn("<args>")
+  fun! AddGit(name, url)
+      let g:vim_script_manager['plugin_sources'][a:name]= { 'type' : 'git', 'url' : a:url }
+      call AddOn(a:name)
+  endf
+  com! -nargs=+ AddGit call AddGit(<f-args>)
+
+" =============================================
+" =============================================
+  "requires a post install 'rake make' in the install directory
+  AddOn Command-T
+
+  AddOn rails
+
+  AddOn Align294
+
+  AddOn snippetsEmu
+
+  AddGit emu-eggs https://bradphelan@github.com/bradphelan/emu-eggs.git
+" =============================================
 " =============================================
 
-"requires a post install 'rake make' in the install directory
-AddOn Command-T
+endif
 
-AddOn rails
-
-AddOn Align294
-
-AddOn snippetsEmu
-
-AddGit emu-eggs https://bradphelan@github.com/bradphelan/emu-eggs.git
-
+" =============================================
+"             End Add On Packages
 " =============================================
 
 set expandtab
