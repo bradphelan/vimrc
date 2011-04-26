@@ -25,11 +25,11 @@ if ! isdirectory(expand("$HOME/vim/vim-addon-manager"))
 else
   set runtimepath+=$HOME/vim/vim-addon-manager
   fun! AddOn(plug)
-      call scriptmanager#Activate(a:plug)
+      call vam#ActivateAddons(a:plug)
   endf
   com! -nargs=1 AddOn call AddOn("<args>")
   fun! AddGit(name, url)
-      let g:vim_script_manager['plugin_sources'][a:name]= { 'type' : 'git', 'url' : a:url }
+      let g:vim_addon_manager['plugin_sources'][a:name]= { 'type' : 'git', 'url' : a:url }
       call AddOn(a:name)
   endf
   com! -nargs=+ AddGit call AddGit(<f-args>)
@@ -46,6 +46,16 @@ else
   AddOn snippetsEmu
 
   AddGit emu-eggs https://bradphelan@github.com/bradphelan/emu-eggs.git
+
+  AddGit coffee-script https://github.com/kchmck/vim-coffee-script.git
+
+  AddGit applescript https://github.com/vim-scripts/applescript.vim.git
+
+  AddGit enhanced-commentify https://github.com/hrp/EnhancedCommentify.git
+
+  AddGit vis-incr https://github.com/vim-scripts/VisIncr
+
+  AddGit css-color https://github.com/skammer/vim-css-color.git
 
   " GIT integration
   AddOn vcscommand
@@ -154,3 +164,5 @@ vnoremap ; "hy:%s/<C-r>h//gc<left><left><left>
 
 " ^W is a pain to use. normal mode 's' is hardly used.
 nmap s 
+
+au BufRead,BufNewFile *.applescript set ft=applescript
